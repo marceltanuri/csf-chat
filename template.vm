@@ -1,0 +1,13 @@
+<input type="hidden" id="accountNumber" value="$request.get('portlet-session').get('application-attributes').get('LIFERAY_SHARED_CSF_SELECTED_ACCOUNT_KEY')">
+<div class="chat-popup" id="chatPanel"><span class="chatClose" onclick="closeForm();">x</span>
+<form class="form-container" id="chatForm" style="height: 220px; width: 300px;">
+<div id="chatWelcome">&nbsp;
+<h4>Por favor, confirme seu cpf para continuar.</h4>
+<br />
+<label id="msgInvalidCPF" style="color: red; display: none;">CPF inválido</label> <input class="allownumericwithoutdecimal" id="customerCPF" maxlength="11" placeholder="Digite aqui o seu CPF" type="text" /><br />
+<br />
+<button class="btn submit" disabled="disabled" id="buttonCPF" onclick="$(this).prop('disabled','true'); $(this).html('Carregando...'); startChat();" type="button">Começar</button></div>
+<iframe height="480px" id="iframeChat" src="" style="display: none; border: 0px;"></iframe></form>
+</div>
+
+$HTML2028.getData()
