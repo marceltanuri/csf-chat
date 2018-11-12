@@ -1,0 +1,229 @@
+<style type="text/css">/* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 999999;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.chatClose{
+    cursor: pointer;
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    color: #a91414;
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+<script>
+
+$("#customerCPF").on('keyup', function() {
+  var buttonCPF = $("#buttonCPF");
+  if($(this).val().length==11){
+    if(validaCPF($(this).val())){
+      $("#msgInvalidCPF").hide();
+      $(buttonCPF).removeAttr('disabled');
+    }
+    else{
+     $("#msgInvalidCPF").show();
+     $(buttonCPF).attr('disabled','disabled');
+    }
+  }
+  else{
+    $(buttonCPF).attr('disabled','disabled');
+    $("#msgInvalidCPF").hide();
+  }
+}
+);
+
+function openForm() {
+  $("#chatPanel").show();
+}
+
+function startChat(){
+  var iframe = $('<iframe/>');
+  $(iframe).attr({
+      src : '/group/logada/dados-cadastrais',
+      style : 'display:none',
+      onload : "loadChat(this)"
+  });
+ $(iframe).appendTo("body");
+}
+
+function closeForm() {
+    document.getElementById("chatPanel").style.display = "none";
+}
+
+
+function loadChat(iframeDadosCadastrais){
+  console.log('versao 1.9');
+
+  var cpf = $("#customerCPF").val();
+  console.log(cpf);
+
+  var email = $(iframeDadosCadastrais).contents().find('#email').val();
+  if (email == ""){
+      email = $(iframeDadosCadastrais).contents().find('#email').html();
+  }
+  console.log(email);
+
+  var dddphone = $(iframeDadosCadastrais).contents().find('#dddphone').val();
+  if (dddphone == ""){
+      dddphone = $(iframeDadosCadastrais).contents().find('#dddphone').html();
+  }
+  console.log(dddphone);
+
+  var phone = $(iframeDadosCadastrais).contents().find('#phone').val();
+  if (phone == ""){
+      phone = $(iframeDadosCadastrais).contents().find('#phone').html();
+  }
+  console.log(phone);
+
+  var dddcellphone = $(iframeDadosCadastrais).contents().find('#dddcellphone').val();
+  if (dddcellphone == ""){
+      dddcellphone = $(iframeDadosCadastrais).contents().find('#dddcellphone').html();
+  }
+  console.log(dddcellphone);
+
+  var cellphone = $(iframeDadosCadastrais).contents().find('#cellphone').val();
+  if (cellphone == ""){
+      cellphone = $(iframeDadosCadastrais).contents().find('#cellphone').html();
+  }
+  console.log(cellphone);
+
+  var finalphone = dddcellphone + cellphone;
+  if(finalphone==""){
+      finalphone==dddphone + phone;
+  }
+
+var name = $(".dadosCartao").eq(0).find("p").eq(0).find("span").eq(0).html();
+console.log(name);
+
+  $("#chatWelcome").hide();
+  $("#chatForm").css("height","480px");
+  $("#iframeChat").attr("src","http://chat.atendimentocarrefour.com/chat/client/?name="+name+"&phone="+finalphone+"&cpf="+cpf+"&email="+email).show();
+}
+
+function validaCPF(cpf)
+  {
+    var numeros, digitos, soma, i, resultado, digitos_iguais;
+    digitos_iguais = 1;
+    if (cpf.length < 11)
+          return false;
+    for (i = 0; i < cpf.length - 1; i++)
+          if (cpf.charAt(i) != cpf.charAt(i + 1))
+                {
+                digitos_iguais = 0;
+                break;
+                }
+    if (!digitos_iguais)
+          {
+          numeros = cpf.substring(0,9);
+          digitos = cpf.substring(9);
+          soma = 0;
+          for (i = 10; i > 1; i--)
+                soma += numeros.charAt(10 - i) * i;
+          resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+          if (resultado != digitos.charAt(0))
+                return false;
+          numeros = cpf.substring(0,10);
+          soma = 0;
+          for (i = 11; i > 1; i--)
+                soma += numeros.charAt(11 - i) * i;
+          resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+          if (resultado != digitos.charAt(1))
+                return false;
+          return true;
+          }
+    else
+        return false;
+  }
+
+   $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {
+           $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
+   var saoPauloCurrentTime = new Promise(function(resolve, reject) {
+  $.ajax({
+     type: "GET",
+     dataType: "jsonp",
+     url: "http://jsonpwrapper.com/?urls%5B%5D=http%3A%2F%2Fworldtimeapi.org%2Fapi%2Ftimezone%2FAmerica%2FSao_Paulo&callback=?",
+     success: function(data){
+       var datetime = JSON.parse(data[0].body).datetime;
+       var time = datetime.substring(datetime.indexOf("T")+1,datetime.indexOf("."));
+       resolve(time.replace(":","").replace(":",""));
+     }, error: function(){resolve("");}
+  });
+});
+
+saoPauloCurrentTime.then(function(value) {
+console.log(value);
+});
+
+</script>
