@@ -1,1 +1,2 @@
+<!-- Template used to get accountNumber from the session and put it into a hidden input. this template must be rendered on dados-cadastrais page -->
 <input type="hidden" id="accountNumber" value="$request.get('portlet-session').get('application-attributes').get('LIFERAY_SHARED_CSF_SELECTED_ACCOUNT_KEY')">
