@@ -1,5 +1,3 @@
-<script>
-
 //CPF validation
 $("#customerCPF").on('keyup', function() {
   var buttonCPF = $("#buttonCPF");
@@ -144,5 +142,3 @@ function validaCPF(cpf)
 
 saoPauloCurrentTime.then(function(value) {
 });
-
-</script>
