@@ -153,6 +153,11 @@ function loadChat(iframeDadosCadastrais){
   }
 
 var name = $(".dadosCartao").eq(0).find("p").eq(0).find("span").eq(0).html();
+  
+var accountNumber = $(iframeDadosCadastrais).contents().find('#accountNumber').val(); //not using yet
+if (accountNumber == ""){
+      accountNumber = $(iframeDadosCadastrais).contents().find('#accountNumber').html();
+}
 
   $("#chatWelcome").hide();
   $("#chatForm").css("height","480px");
