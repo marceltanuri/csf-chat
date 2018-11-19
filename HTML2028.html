@@ -119,40 +119,33 @@ function closeForm() {
 
 
 function loadChat(iframeDadosCadastrais){
-  console.log('versao 1.9');
 
   var cpf = $("#customerCPF").val();
-  console.log(cpf);
 
   var email = $(iframeDadosCadastrais).contents().find('#email').val();
   if (email == ""){
       email = $(iframeDadosCadastrais).contents().find('#email').html();
   }
-  console.log(email);
 
   var dddphone = $(iframeDadosCadastrais).contents().find('#dddphone').val();
   if (dddphone == ""){
       dddphone = $(iframeDadosCadastrais).contents().find('#dddphone').html();
   }
-  console.log(dddphone);
 
   var phone = $(iframeDadosCadastrais).contents().find('#phone').val();
   if (phone == ""){
       phone = $(iframeDadosCadastrais).contents().find('#phone').html();
   }
-  console.log(phone);
 
   var dddcellphone = $(iframeDadosCadastrais).contents().find('#dddcellphone').val();
   if (dddcellphone == ""){
       dddcellphone = $(iframeDadosCadastrais).contents().find('#dddcellphone').html();
   }
-  console.log(dddcellphone);
 
   var cellphone = $(iframeDadosCadastrais).contents().find('#cellphone').val();
   if (cellphone == ""){
       cellphone = $(iframeDadosCadastrais).contents().find('#cellphone').html();
   }
-  console.log(cellphone);
 
   var finalphone = dddcellphone + cellphone;
   if(finalphone==""){
@@ -160,7 +153,6 @@ function loadChat(iframeDadosCadastrais){
   }
 
 var name = $(".dadosCartao").eq(0).find("p").eq(0).find("span").eq(0).html();
-console.log(name);
 
   $("#chatWelcome").hide();
   $("#chatForm").css("height","480px");
