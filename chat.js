@@ -1,3 +1,6 @@
+//chat.min.js developed by Chat Vendor
+var opened=!1,openedFirstTime=!1;function openIframe(){opened?(opened=!1,$("#iframe").css("display","none")):(openedFirstTime||($("#iframe").attr("src",ref),openedFirstTime=!0),$("#iframe").css("display","block"),opened=!0)}var eventMethod=window.addEventListener?"addEventListener":"attachEvent",eventer=window[eventMethod],messageEvent="attachEvent"===eventMethod?"onmessage":"message";eventer(messageEvent,function(e){"close"!==e.data&&"close"!==e.message||(console.log("Message from iframe just came!"),console.log(e),opened=!1,openedFirstTime=!1,$("#iframe").css("display","none"))});
+
 //CPF validation
 $("#customerCPF").on('keyup', function() {
   var buttonCPF = $("#buttonCPF");
@@ -18,9 +21,9 @@ $("#customerCPF").on('keyup', function() {
 }
 );
 
-//Display Chat
+//Display CPF panel
 function openForm() {
-  $("#chatPanel").show();
+  $("#cpfPanel").show();
 }
 
 function startChat(){
@@ -33,9 +36,9 @@ function startChat(){
  $(iframe).appendTo("body");
 }
 
-//Hide Chat
+//Hide CPF panel
 function closeForm() {
-    document.getElementById("chatPanel").style.display = "none";
+    document.getElementById("cpfPanel").style.display = "none";
 }
 
 //Init Chat by getting required customer information from dados-cadastrais page
@@ -80,9 +83,10 @@ if (accountNumber == ""){
       accountNumber = $(iframeDadosCadastrais).contents().find('#accountNumber').html();
 }
 
-  $("#chatWelcome").hide();
-  $("#chatForm").css("height","480px");
-  $("#iframeChat").attr("src","http://chat.atendimentocarrefour.com/chat/client/?name="+name+"&phone="+finalphone+"&cpf="+cpf+"&email="+email).show();
+  $("#cpfPanel").hide();
+
+  ref = "https://chatonline.atendimentocarrefour.com/omni-api/attendance/chat/attendanceIntegration?corporationId=5&channelId=10&queueId=1&fromApi=true&name="+name+"&phone="+finalphone+"&cpf="+cpf+"&email="+email+"&uf=SP";
+  openIframe();
 }
 
 function validaCPF(cpf)
