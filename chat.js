@@ -82,14 +82,15 @@ var accountNumber = $(iframeDadosCadastrais).contents().find('#accountNumber').v
 if (accountNumber == ""){
       accountNumber = $(iframeDadosCadastrais).contents().find('#accountNumber').html();
 }
-
-  $("#cpfPanel").hide();
-  $("#buttonCPF").prop('disabled','false').html('Começar'); 
-  $("#customerCPF").val("");
-
   ref = "https://chatonline.atendimentocarrefour.com/omni-api/attendance/chat/attendanceIntegration?corporationId=5&channelId=10&queueId=1&fromApi=true&name="+name+"&cellphone="+finalphone+"&cpf="+cpf+"&email="+email+"&uf=SP";
   openIframe();
 }
+
+$("#iframe").load(function(){
+  $("#cpfPanel").hide();
+  $("#buttonCPF").prop('disabled','false').html('Começar'); 
+  $("#customerCPF").val("");
+});
 
 function validaCPF(cpf)
   {
