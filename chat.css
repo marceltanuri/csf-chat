@@ -38,11 +38,12 @@
 }
 
 #iframe {
-  position: absolute;
+  position: fixed;
   right: 10px;
-  bottom: 10px;
   height: 80%;
   width: 30%;
   display: none;
   border: 0px;
+  bottom: 0;
+  z-index: 999999;
 }

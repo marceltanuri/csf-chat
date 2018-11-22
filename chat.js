@@ -85,7 +85,7 @@ if (accountNumber == ""){
 
   $("#cpfPanel").hide();
 
-  ref = "https://chatonline.atendimentocarrefour.com/omni-api/attendance/chat/attendanceIntegration?corporationId=5&channelId=10&queueId=1&fromApi=true&name="+name+"&phone="+finalphone+"&cpf="+cpf+"&email="+email+"&uf=SP";
+  ref = "https://chatonline.atendimentocarrefour.com/omni-api/attendance/chat/attendanceIntegration?corporationId=5&channelId=10&queueId=1&fromApi=true&name="+name+"&cellphone="+finalphone+"&cpf="+cpf+"&email="+email+"&uf=SP";
   openIframe();
 }
 
